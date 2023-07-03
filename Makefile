@@ -16,26 +16,26 @@ clean:
 .PHONY: setup
 setup:
 	@echo "creating virtual environment..."
-	@python -m venv $(VENV_DIR) 
+	@python3 -m venv $(VENV_DIR) 
 	@echo "updating PIP..."
-	@$(VENV_DIR)/Scripts/python -m pip install --upgrade pip
+	@$(VENV_DIR)/bin/python -m pip install --upgrade pip
 	@echo "installing requirements..."
-	@$(VENV_DIR)/Scripts/pip.exe install -r requirements-dev.txt
-	@ln -sf $(VENV_DIR)/Scripts/activate ./activate
+	@$(VENV_DIR)/bin/pip install -r requirements-dev.txt
+	@ln -sf $(VENV_DIR)/bin/activate ./activate
 	@echo " "
 	@echo "Run virtual environment with '. activate'..."
 
 .PHONY: format
 format:
 	@echo "running black on all python code..."
-	@. $(VENV_DIR)/Scripts/activate
+	@. $(VENV_DIR)/bin/activate
 	@black src/
 	
 .PHONY: run
 run: $(VENV_DIR)
 	@echo "running main astronomical algorithm program..."
-	@. $(VENV_DIR)/Scripts/activate
-	@$(VENV_DIR)/Scripts/python.exe main.py
+	@. $(VENV_DIR)/bin/activate
+	@$(VENV_DIR)/bin/python main.py
 
 .PHONY: test
 test:
